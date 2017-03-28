@@ -11,6 +11,7 @@ var model = {
 
 }
 
+// ViewModel
 var viewModel = {
 	locations: ko.observableArray(model.locations),
 
