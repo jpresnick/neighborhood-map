@@ -26,6 +26,7 @@ html, body {
 	height: 100%;
 	width: 25%;
 	background-color: black;
+	color: white;
 	float: left;
 	position: absolute;
 	-webkit-transform: translate(-500px, 0);

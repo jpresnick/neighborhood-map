@@ -12,9 +12,11 @@ var model = {
 }
 
 // ViewModel
-var ViewModel = {
-	
-}
+var viewModel = {
+	locations: ko.observableArray(model.locations)
+};
+
+ko.applyBindings(viewModel);
 
 var View = {
 	initMap: function(){
@@ -37,7 +39,7 @@ var View = {
 			markers.push(marker);
 		}
 	}
-}
+};
 
 // This block of code contains the functionality for the slide out list
 var menu = document.querySelector('#menu');
