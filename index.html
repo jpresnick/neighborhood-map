@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" /> -->
+	<link rel="stylesheet" type="text/css" href="static/main.css" />
+</head>
+<body>
+	<div class='container' id='container'>
+		<div class='nav-bar'>
+			<a id='menu'>
+				<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+					<path d='M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z'></path>
+				</svg>
+			</a>
+		</div>
+		<div class='list' id='list'>list</div>
+		<div id='map'></div>
+	</div>
+</body>
+<script type="text/javascript">
+	var map;
+	function initMap() {
+        // Constructor creates a new map - only center and zoom are required.
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: 40.7413549, lng: -73.9980244},
+			zoom: 13
+		});
+	}
+</script>
+<script async defer 
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGg6jzODABTeFl6vl5GIk17Wg_vgns9dA&v=3&callback=initMap">
+</script>
+<script>
+	var menu = document.querySelector('#menu');
+	var list = document.querySelector('#list');
+	var container = document.querySelector('#container');
+	menu.addEventListener('click', function(e) {
+		list.classList.toggle('open');
+		if (document.getElementById("map").style.width == "75%") {
+			document.getElementById("map").style.width = "100%";
+		}
+		else {
+			document.getElementById("map").style.width = "75%";
+		};
+		e.stopPropagation();
+	});
+	container.addEventListener('click', function() {
+		list.classList.remove('open');
+		document.getElementById('map').style.width = "100%";
+	});
+</script>
+
+</html>
