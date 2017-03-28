@@ -11,11 +11,22 @@ var model = {
 
 }
 
-// ViewModel
 var viewModel = {
-	locations: ko.observableArray(model.locations)
-};
+	locations: ko.observableArray(model.locations),
 
+	openList: function() {
+		var menu = document.querySelector('#menu');
+		var list = document.querySelector('#list');
+		var container = document.querySelector('#container');
+		list.classList.toggle('open');
+		if (document.getElementById("map").style.width == "75%") {
+			document.getElementById("map").style.width = "100%";
+		}
+		else {
+			document.getElementById("map").style.width = "75%";
+		};
+	}
+};
 ko.applyBindings(viewModel);
 
 var View = {
@@ -40,22 +51,3 @@ var View = {
 		}
 	}
 };
-
-// This block of code contains the functionality for the slide out list
-var menu = document.querySelector('#menu');
-var list = document.querySelector('#list');
-var container = document.querySelector('#container');
-menu.addEventListener('click', function(e) {
-	list.classList.toggle('open');
-	if (document.getElementById("map").style.width == "75%") {
-		document.getElementById("map").style.width = "100%";
-	}
-	else {
-		document.getElementById("map").style.width = "75%";
-	};
-	e.stopPropagation();
-});
-container.addEventListener('click', function() {
-	list.classList.remove('open');
-	document.getElementById('map').style.width = "100%";
-});
