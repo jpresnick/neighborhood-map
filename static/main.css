@@ -60,3 +60,8 @@ a#menu svg {
 	padding-left: 15px;
 	padding-top: 4px;
 }
+
+#streetview {
+        width: 200px;
+        height: 200px;
+      }

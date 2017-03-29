@@ -58,11 +58,36 @@ var view = {
 	openInfoWindow: function(marker, infowindow) {
 		if (infowindow.marker != marker) {
 			infowindow.marker = marker;
-			infowindow.setContent('<div>' + marker.title + '<div>');
+			infowindow.setContent('');
 			infowindow.open(map, marker);
 			infowindow.addListener('closeclick', function() {
 				infowindow.setMarker = null;
 			});
+			var streetViewService = new google.maps.StreetViewService();
+			var radius = 50;
+			function getStreetView(data, status) {
+				if (status == google.maps.StreetViewStatus.OK) {
+					var nearStreetViewLocation = data.location.latLng;
+					var heading = google.maps.geometry.spherical.computeHeading(
+						nearStreetViewLocation, marker.position);
+					infowindow.setContent('<div>' + marker.title + '</div><div id="streetview"></div>');
+						var panoramaOptions = {
+							position: nearStreetViewLocation,
+							pov: {
+								heading: heading,
+								pitch: 30
+							}
+						};
+					var panorama = new google.maps.StreetViewPanorama(
+						document.getElementById('streetview'), panoramaOptions);
+				} 
+				else {
+						infowindow.setContent('<div>' + marker.title + '</div>' +
+							'<div>No Street View Found</div>');
+				}
+			}
+			streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+			infowindow.open(map, marker);
 		}
 	}
 };
