@@ -59,7 +59,10 @@ var view = {
 			model.locations[i].marker = marker;
 			view.markers.push(marker);
 			marker.addListener('click', function() {
-				view.openInfoWindow(this, largeInfoWindow);
+				var self = this;
+				view.openInfoWindow(self, largeInfoWindow);
+				self.setAnimation(google.maps.Animation.BOUNCE);
+    			setTimeout(function(){ self.setAnimation(null); }, 750);
 			});
 		}
 		google.maps.event.addDomListener(window, "resize", function() {
