@@ -63,6 +63,17 @@ a#menu svg {
 	padding-top: 4px;
 }
 
+#menu {
+	float: left;
+}
+
+.title {
+	width: 100%;
+	margin: 0;
+	padding-top: 10px;
+	text-align: center;
+}
+
 #streetview {
         width: 200px;
         height: 200px;
