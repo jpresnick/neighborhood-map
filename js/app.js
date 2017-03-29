@@ -30,8 +30,8 @@ var viewModel = {
 };
 ko.applyBindings(viewModel);
 
-var View = {
-	initMap: function(){
+var view = {
+	initMap: function() {
 		var markers = [];
 	    // Constructor creates a new map - only center and zoom are required.
 		var map = new google.maps.Map(document.getElementById('map'), {
@@ -39,6 +39,7 @@ var View = {
 			zoom: 12
 		});
 
+		var largeInfoWindow = new google.maps.InfoWindow();
 		for (var i = 0; i < model.locations.length; i++){
 			var position = model.locations[i].location;
 			var title = model.locations[i].title;
@@ -49,6 +50,19 @@ var View = {
 				id: i
 			});
 			markers.push(marker);
+			marker.addListener('click', function() {
+				view.openInfoWindow(this, largeInfoWindow);
+			});
+		}
+	},
+	openInfoWindow: function(marker, infowindow) {
+		if (infowindow.marker != marker) {
+			infowindow.marker = marker;
+			infowindow.setContent('<div>' + marker.title + '<div>');
+			infowindow.open(map, marker);
+			infowindow.addListener('closeclick', function() {
+				infowindow.setMarker = null;
+			});
 		}
 	}
 };
