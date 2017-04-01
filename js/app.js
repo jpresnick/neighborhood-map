@@ -13,7 +13,20 @@ var model = {
 
 // ViewModel
 var viewModel = {
-	locations: ko.observableArray(model.locations),
+	self: this,
+	filter: ko.observable(''),
+	filteredLocations: ko.computed(function() {
+		var filter = self.filter;
+		if (!filter) {
+			return model.locations;
+		}
+		else {
+			var filtered = ko.utils.arrayFilter(model.locations, function(items) {
+				return ko.utils.stringStartsWith(model.locations.title().toLowerCase(), filter);
+			});
+			return filtered;
+		}
+	}),
 
 	openList: function() {
 		var menu = document.querySelector('#menu');

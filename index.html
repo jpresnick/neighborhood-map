@@ -18,8 +18,8 @@
 			<h2 class='title'>Neighborhood Map</h2>
 		</div>
 		<div class='list' id='list'>
-			<input type='text' class='filter-box' placeholder='Filter'>
-			<ul data-bind='foreach: locations'>
+			<input type='text' id='filter-box' placeholder='Filter' data-bind='textInput: filter, valueUpdate: "afterkeydown"'>
+			<ul data-bind='foreach: filteredLocations'>
 				<li class='list-element' data-bind='click: viewModel.findMarker'>
 					<span data-bind='text: title'></span>
 				</li>

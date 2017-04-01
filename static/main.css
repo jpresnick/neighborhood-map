@@ -81,7 +81,7 @@ a#menu svg {
         height: 200px;
 }
 
-.filter-box {
+#filter-box {
 	margin: 10px;
 	width: calc(100% - 30px);
 	font-size: 12px;
@@ -96,7 +96,7 @@ a#menu svg {
 		padding-right: 20px;
 	}
 
-	.filter-box {
+	#filter-box {
 		padding-top: 8px;
 		padding-bottom: 8px;
 		font-size: 20px;
