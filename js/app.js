@@ -26,6 +26,7 @@ var viewModel = {
 		else {
 			document.getElementById("map").style.width = "75%";
 		};
+		view.centerMap();
 	},
 	findMarker: function() {
 		google.maps.event.trigger(this.marker, 'click');
@@ -47,6 +48,7 @@ var view = {
 		});
 
 		largeInfoWindow = new google.maps.InfoWindow();
+		bounds = new google.maps.LatLngBounds();
 		for (var i = 0; i < model.locations.length; i++){
 			var position = model.locations[i].location;
 			var title = model.locations[i].title;
@@ -64,12 +66,17 @@ var view = {
 				self.setAnimation(google.maps.Animation.BOUNCE);
     			setTimeout(function(){ self.setAnimation(null); }, 750);
 			});
+			bounds.extend(model.locations[i].location)
 		}
+		map.fitBounds(bounds);
 		google.maps.event.addDomListener(window, "resize", function() {
-    		var center = map.getCenter();
-    			google.maps.event.trigger(map, "resize");
-    			map.setCenter(center); 
+    		view.centerMap();
 		});
+	},
+	centerMap: function() {
+		center = map.getCenter();
+    	google.maps.event.trigger(map, "resize");
+    	map.setCenter(center); 
 	},
 	openInfoWindow: function(marker, infowindow) {
 		if (infowindow.marker != marker) {
