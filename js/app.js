@@ -13,20 +13,7 @@ var model = {
 
 // ViewModel
 var viewModel = {
-	self: this,
 	filter: ko.observable(''),
-	filteredLocations: ko.computed(function() {
-		var filter = self.filter;
-		if (!filter) {
-			return model.locations;
-		}
-		else {
-			var filtered = ko.utils.arrayFilter(model.locations, function(items) {
-				return ko.utils.stringStartsWith(model.locations.title().toLowerCase(), filter);
-			});
-			return filtered;
-		}
-	}),
 
 	openList: function() {
 		var menu = document.querySelector('#menu');
@@ -47,6 +34,24 @@ var viewModel = {
 	}
 
 };
+viewModel.filteredLocations = ko.computed(function() {
+	var filter = this.filter();
+	if (!filter) {
+		return model.locations;
+	}
+	else {
+		var filtered = ko.utils.arrayFilter(model.locations, function(item) {
+			console.log(item);
+			return filterText(item.title.toLowerCase(), filter);
+		});
+		return filtered;
+	}
+}, viewModel);
+var filterText = function(string, filter) {
+	if (filter.length > string.length)
+		return False;
+	return string.substring(0, filter.length) === filter;
+}
 ko.applyBindings(viewModel);
 
 var view = {
