@@ -20,16 +20,21 @@
 		<div class='list' id='list'>
 			<input type='text' id='filter-box' placeholder='Filter' data-bind='textInput: viewModel.filter, valueUpdate: "afterkeydown"'>
 			<ul data-bind='foreach: viewModel.filteredLocations'>
-				<li class='list-element' data-bind='click: viewModel.findMarker'>
+				<li class='list-element' data-bind='click: viewModel.getForecast'>
 					<span data-bind='text: title'></span>
 				</li>	
 			</ul>
 		</div>
 		<div id='map'></div>
-		<div class='weather'>
-			<div class='forecast'></div>
-			<div class='forecast'></div>
-			<div class='forecast'></div>
+		<div class='weather' data-bind='foreach: viewModel.forecastJSON'>
+			<ul>
+				<div data-bind='text: date.weekday_short' class='day'></div>
+				<!-- <div data-bind='text: "hi: " + high.fahrenheit' class='temp'></div>
+				<br> -->
+				<img data-bind='attr: {src: icon_url}' class='forecast'>
+				<div data-bind='text: high.fahrenheit' class='hightemp'></div>
+				<div data-bind='text: low.fahrenheit' class='lowtemp'></div>
+			</ul>
 		</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>

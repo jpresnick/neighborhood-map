@@ -27,15 +27,50 @@ html, body {
 .weather {
 	position: absolute;
 	top: 50px;
-	margin-left: calc(50% - 125px);
+	margin-left: calc(48% - 125px);
+	background-color: #b3b3b3;
+	padding-left: 5px;
+	border: solid 1px black;
 }
 
 .forecast {
-	height: 100px;
-	width: 100px;
+	height: 60px;
+	width: 60px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
 	background-color: white;
 	float: left;
 	border: solid 1px black;
+}
+
+/*.day { 
+	display: inline;
+}*/
+
+.hightemp {
+	position: absolute;
+	padding-left: 2px;
+	top: 10;
+	font-size: 12px;
+	color: #992600;
+	text-decoration: bold;
+}
+.lowtemp {
+	position: absolute;
+	padding-left: 2px;
+	top: 27px;
+	font-size: 12px;
+	color: #0000cc;
+	text-decoration: bold;
+}
+
+ul {
+	display: inline-block;
+	margin-top: 0;
+	font-size: 15px;
+	padding-right: 5px;
+	margin-bottom: 5px;
 }
 
 .list {

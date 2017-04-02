@@ -50,10 +50,12 @@ var viewModel = {
 				url: 'http://api.wunderground.com/api/e8145af40a88765c/forecast/q/FL/ST_Petersburg.json',
 				dataType: 'jsonp',
 				success: function(parsed_json) {
-					viewModel.forecastJSON = parsed_json['forecast']['txt_forecast']['forecastday'];
-					for (var i = 0; i < viewModel.forecastJSON.length; i++){
-						console.log(viewModel.forecastJSON[i]['icon_url']);
+					var json = parsed_json['forecast']['simpleforecast']['forecastday'];
+					console.log(json);
+					for (var i = 0; i < json.length; i++){
+							viewModel.forecastJSON.push(json[i]);
 					}
+					console.log(viewModel.forecastJSON());
 				}
 			});
 		});
