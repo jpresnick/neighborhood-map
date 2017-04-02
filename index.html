@@ -22,8 +22,10 @@
 			<ul data-bind='foreach: filteredLocations'>
 				<li class='list-element' data-bind='click: viewModel.findMarker'>
 					<span data-bind='text: title'></span>
-				</li>
+				</li>	
 			</ul>
+			<input type='submit' data-bind='click: viewModel.hideListings' value='hide'>
+			<input type='submit' data-bind='click: viewModel.showFilteredListings' value='show'>
 		</div>
 		<div id='map'></div>
 	</div>

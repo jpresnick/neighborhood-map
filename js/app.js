@@ -30,18 +30,32 @@ var viewModel = {
 	},
 	findMarker: function() {
 		google.maps.event.trigger(this.marker, 'click');
-		console.log(this.marker);
+	},
+	showFilteredListings: function() {
+		for (var i = 0; i < view.markers.length; i++) {
+			if (filterText(view.markers[i].title.toLowerCase(), viewModel.filter())) {
+				view.markers[i].setMap(view.map);
+			}
+		}
+	},
+	hideListings: function() {
+		for (var i = 0; i < view.markers.length; i++) {
+			view.markers[i].setMap(null);
+		}
 	}
-
 };
 viewModel.filteredLocations = ko.computed(function() {
 	var filter = this.filter();
 	if (!filter) {
+		if (document.readyState === 'complete'){
+			viewModel.showFilteredListings();
+		}
 		return model.locations;
-	}
+	}	
 	else {
+		viewModel.hideListings();
+		viewModel.showFilteredListings();
 		var filtered = ko.utils.arrayFilter(model.locations, function(item) {
-			console.log(item);
 			return filterText(item.title.toLowerCase(), filter);
 		});
 		return filtered;
@@ -60,7 +74,7 @@ var view = {
 	largeInfoWindow: '',
 	initMap: function() {
 	    // Constructor creates a new map - only center and zoom are required.
-		map = new google.maps.Map(document.getElementById('map'), {
+		view.map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 27.762315, lng: -82.695607},
 			zoom: 12
 		});
@@ -71,7 +85,7 @@ var view = {
 			var position = model.locations[i].location;
 			var title = model.locations[i].title;
 			var marker = new google.maps.Marker({
-				map: map,
+				map: view.map,
 				position: position,
 				title: title,
 				id: i
@@ -86,21 +100,21 @@ var view = {
 			});
 			bounds.extend(model.locations[i].location)
 		}
-		map.fitBounds(bounds);
+		view.map.fitBounds(bounds);
 		google.maps.event.addDomListener(window, "resize", function() {
     		view.centerMap();
 		});
 	},
 	centerMap: function() {
-		center = map.getCenter();
-    	google.maps.event.trigger(map, "resize");
-    	map.setCenter(center); 
+		center = view.map.getCenter();
+    	google.maps.event.trigger(view.map, "resize");
+    	view.map.setCenter(center); 
 	},
 	openInfoWindow: function(marker, infowindow) {
 		if (infowindow.marker != marker) {
 			infowindow.marker = marker;
 			infowindow.setContent('');
-			infowindow.open(map, marker);
+			infowindow.open(view.map, marker);
 			infowindow.addListener('closeclick', function() {
 				infowindow.setMarker = null;
 			});
@@ -128,7 +142,7 @@ var view = {
 				}
 			}
 			streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-			infowindow.open(map, marker);
+			infowindow.open(view.map, marker);
 		}
 	}
 };
