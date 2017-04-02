@@ -27,7 +27,7 @@ html, body {
 .weather {
 	position: absolute;
 	top: 50px;
-	margin-left: calc(48% - 125px);
+	margin-left: calc(49% - 125px);
 	background-color: #b3b3b3;
 	padding-left: 5px;
 	border: solid 1px black;
@@ -43,10 +43,6 @@ html, body {
 	float: left;
 	border: solid 1px black;
 }
-
-/*.day { 
-	display: inline;
-}*/
 
 .hightemp {
 	position: absolute;
@@ -149,5 +145,22 @@ a#menu svg {
 		padding-top: 8px;
 		padding-bottom: 8px;
 		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.forecast{
+		height: 40px;
+		width: 40px;
+	}
+
+	.weather {
+		margin-left: 0;
+		right: 0;
+		padding-left: 3px;
+	}
+
+	ul {
+		padding-right: 3px;
 	}
 }
