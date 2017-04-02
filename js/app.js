@@ -45,7 +45,7 @@ var viewModel = {
 	getForcast: function($){
 		jQuery(document).ready(function($){
 			$.ajax({
-				url: 'http://api.wunderground.com/api/e8145af40a88765c/forecast/q/FL/ST_Petersburg.json',
+				url: 'http://api.wunderground.com/api/e8145af40a88765c/forecast/q/FL/Saint_Petersburg.json',
 				dataType: 'jsonp',
 				success: function(parsed_json) {
 					var json = parsed_json['forecast']['simpleforecast']['forecastday'];
@@ -69,7 +69,6 @@ viewModel.filteredLocations = ko.computed(function() {
 		viewModel.hideListings();
 		viewModel.showFilteredListings();
 		var filtered = ko.utils.arrayFilter(model.locations, function(item) {
-			return filterText(item.title.toLowerCase(), filter);
 		});
 		return filtered;
 	}
@@ -79,12 +78,20 @@ var filterText = function(string, filter) {
 		return False;
 	return string.substring(0, filter.length) === filter;
 }
-ko.applyBindings(viewModel);
 
 var view = {
 	markers : [],
 	map: '',
 	largeInfoWindow: '',
+	googleSuccess: function() {
+		ko.applyBindings(viewModel);
+		view.initMap();
+		viewModel.getForcast();
+	},
+	googleError: function() {
+		viewModel.getForcast();
+		alert("There was an error loading the page. Please check your internet connection or try again later.");
+	},
 	initMap: function() {
 		view.map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 27.75000, lng: -82.695607},
@@ -117,7 +124,6 @@ var view = {
 		google.maps.event.addDomListener(window, "resize", function() {
     		view.centerMap();
 		});
-		viewModel.getForcast();
 	},
 	centerMap: function() {
 		center = view.map.getCenter();

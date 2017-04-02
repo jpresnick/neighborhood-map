@@ -24,7 +24,7 @@
 			</ul>
 		</div>
 		<div id='map'></div>
-		<div class='weather' data-bind='foreach: viewModel.forecastJSON'>
+		<div id='weather' data-bind='foreach: viewModel.forecastJSON'>
 			<ul>
 				<div data-bind='text: date.weekday_short' class='day'></div>
 				<img data-bind='attr: {src: icon_url}' class='forecast'>
@@ -36,6 +36,6 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src='js/knockout-3.4.2.js'></script>
 	<script src='js/app.js'></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGg6jzODABTeFl6vl5GIk17Wg_vgns9dA&v=3&callback=view.initMap"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGg6jzODABTeFl6vl5GIk17Wg_vgns9dA&v=3&callback=view.googleSuccess" onerror="view.googleError()"></script>
 </body>
 </html>

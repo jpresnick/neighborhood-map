@@ -24,7 +24,7 @@ html, body {
 	width: 100%;
 }
 
-.weather {
+#weather {
 	position: absolute;
 	top: 50px;
 	margin-left: calc(49% - 125px);
@@ -154,7 +154,7 @@ a#menu svg {
 		width: 40px;
 	}
 
-	.weather {
+	#weather {
 		margin-left: 0;
 		right: 0;
 		padding-left: 3px;
