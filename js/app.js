@@ -118,7 +118,6 @@ var view = {
     		view.centerMap();
 		});
 		viewModel.getForcast();
-		console.log(bounds);
 	},
 	centerMap: function() {
 		center = view.map.getCenter();
