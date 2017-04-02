@@ -3,8 +3,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" /> -->
 	<link rel="stylesheet" type="text/css" href="static/main.css" />
 </head>
 <body>
@@ -29,8 +27,6 @@
 		<div class='weather' data-bind='foreach: viewModel.forecastJSON'>
 			<ul>
 				<div data-bind='text: date.weekday_short' class='day'></div>
-				<!-- <div data-bind='text: "hi: " + high.fahrenheit' class='temp'></div>
-				<br> -->
 				<img data-bind='attr: {src: icon_url}' class='forecast'>
 				<div data-bind='text: high.fahrenheit' class='hightemp'></div>
 				<div data-bind='text: low.fahrenheit' class='lowtemp'></div>

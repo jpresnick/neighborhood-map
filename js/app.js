@@ -8,10 +8,8 @@ var model = {
 		{title: "Crawley's Downtown", location: {lat: 27.7712088, lng: -82.6367765}, marker: null},
 		{title: "Hook's Sushi Bar & Thai Food", location: {lat: 27.7837765, lng: -82.6469384}, marker: null}
 	]
-
 }
 
-// ViewModel
 var viewModel = {
 	filter: ko.observable(''),
 
@@ -51,11 +49,9 @@ var viewModel = {
 				dataType: 'jsonp',
 				success: function(parsed_json) {
 					var json = parsed_json['forecast']['simpleforecast']['forecastday'];
-					console.log(json);
 					for (var i = 0; i < json.length; i++){
 							viewModel.forecastJSON.push(json[i]);
 					}
-					console.log(viewModel.forecastJSON());
 				}
 			});
 		});
@@ -90,7 +86,6 @@ var view = {
 	map: '',
 	largeInfoWindow: '',
 	initMap: function() {
-	    // Constructor creates a new map - only center and zoom are required.
 		view.map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 27.75000, lng: -82.695607},
 			zoom: 12
@@ -116,12 +111,14 @@ var view = {
     			setTimeout(function(){ self.setAnimation(null); }, 750);
 			});
 			bounds.extend(model.locations[i].location)
+			bounds.f.b += .002;
 		}
 		view.map.fitBounds(bounds);
 		google.maps.event.addDomListener(window, "resize", function() {
     		view.centerMap();
 		});
 		viewModel.getForcast();
+		console.log(bounds);
 	},
 	centerMap: function() {
 		center = view.map.getCenter();
