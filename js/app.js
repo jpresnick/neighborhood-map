@@ -42,6 +42,21 @@ var viewModel = {
 		for (var i = 0; i < view.markers.length; i++) {
 			view.markers[i].setMap(null);
 		}
+	},
+	forecastJSON: ko.observableArray([]),
+	getForcast: function($){
+		jQuery(document).ready(function($){
+			$.ajax({
+				url: 'http://api.wunderground.com/api/e8145af40a88765c/forecast/q/FL/ST_Petersburg.json',
+				dataType: 'jsonp',
+				success: function(parsed_json) {
+					viewModel.forecastJSON = parsed_json['forecast']['txt_forecast']['forecastday'];
+					for (var i = 0; i < viewModel.forecastJSON.length; i++){
+						console.log(viewModel.forecastJSON[i]['icon_url']);
+					}
+				}
+			});
+		});
 	}
 };
 viewModel.filteredLocations = ko.computed(function() {
@@ -104,6 +119,7 @@ var view = {
 		google.maps.event.addDomListener(window, "resize", function() {
     		view.centerMap();
 		});
+		viewModel.getForcast();
 	},
 	centerMap: function() {
 		center = view.map.getCenter();
@@ -146,3 +162,4 @@ var view = {
 		}
 	}
 };
+

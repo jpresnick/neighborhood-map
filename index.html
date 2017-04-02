@@ -19,14 +19,18 @@
 		</div>
 		<div class='list' id='list'>
 			<input type='text' id='filter-box' placeholder='Filter' data-bind='textInput: viewModel.filter, valueUpdate: "afterkeydown"'>
-			<ul data-bind='foreach: filteredLocations'>
+			<ul data-bind='foreach: viewModel.filteredLocations'>
 				<li class='list-element' data-bind='click: viewModel.findMarker'>
 					<span data-bind='text: title'></span>
 				</li>	
 			</ul>
 		</div>
 		<div id='map'></div>
+		<div class='weather' data-bind='foreach: viewModel.forecastJSON'>
+			<p data-bind='text: icon_url'></p>
+		</div>
 	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src='js/knockout-3.4.2.js'></script>
 	<script src='js/app.js'></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGg6jzODABTeFl6vl5GIk17Wg_vgns9dA&v=3&callback=view.initMap"></script>

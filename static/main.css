@@ -24,6 +24,17 @@ html, body {
 	width: 100%;
 }
 
+.weather {
+	position: fixed;
+	top: 50px;
+	margin-left: 50%;
+	background-color: white;
+}
+
+.forecast {
+	height: 100px;
+}
+
 .list {
 	height: 100%;
 	width: 25%;
