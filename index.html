@@ -18,7 +18,7 @@
 		<div class='list' id='list'>
 			<input type='text' id='filter-box' placeholder='Filter' data-bind='textInput: viewModel.filter, valueUpdate: "afterkeydown"'>
 			<ul data-bind='foreach: viewModel.filteredLocations'>
-				<li class='list-element' data-bind='click: viewModel.getForecast'>
+				<li class='list-element' data-bind='click: viewModel.findMarker'>
 					<span data-bind='text: title'></span>
 				</li>	
 			</ul>
