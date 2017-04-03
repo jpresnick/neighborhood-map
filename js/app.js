@@ -43,8 +43,7 @@ var viewModel = {
 	showFilteredListings: function() {
 		for (var i = 0; i < view.markers.length; i++) {
 			//if marker title starts with the same string that filter does
-			if (filterText(view.markers[i].title.toLowerCase(), viewModel.filter())) {
-				//view.markers[i].setMap(view.map);
+			if (view.markers[i].title.toLowerCase().indexOf(viewModel.filter()) == 0) {
 				view.markers[i].setVisible(true);
 			}
 		}
@@ -53,7 +52,6 @@ var viewModel = {
 	// hides all markers
 	hideListings: function() {
 		for (var i = 0; i < view.markers.length; i++) {
-			//view.markers[i].setMap(null);
 			view.markers[i].setVisible(false);
 		}
 	},
