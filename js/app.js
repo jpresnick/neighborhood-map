@@ -63,13 +63,16 @@ var viewModel = {
 	getForcast: function($){
 		jQuery(document).ready(function($){
 			$.ajax({
-				url: 'http://api.wunderground.com/api/e8145af40a88765c/forecast/q/FL/Saint_Petersburg.json',
+				url: 'http://api.wunderground.co/api/e8145af40a88765c/forecast/q/FL/Saint_Petersburg.json',
 				dataType: 'jsonp',
 				success: function(parsed_json) {
 					var json = parsed_json['forecast']['simpleforecast']['forecastday'];
 					for (var i = 0; i < json.length; i++){
 							viewModel.forecastJSON.push(json[i]);
 					}
+				}, 
+				error: function(data) {
+					alert("Weather failed to load, please check back later.");
 				}
 			});
 		});
