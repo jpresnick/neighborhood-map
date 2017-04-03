@@ -122,7 +122,10 @@ viewModel.filteredLocations = ko.computed(function() {
 		viewModel.hideListings();
 		viewModel.showFilteredListings();
 		var filtered = ko.utils.arrayFilter(model.locations, function(item) {
-			return filterText(item.title.toLowerCase(), filter);
+			if (item.title.toLowerCase().indexOf(filter) == 0){
+				return true;
+			}
+			return false;
 		});
 		return filtered;
 	}
