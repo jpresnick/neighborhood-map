@@ -176,6 +176,7 @@ var view = {
 			// if marker is clicked, open infowindow and bounce pin
 			marker.addListener('click', function() {
 				var self = this;
+				view.map.panTo(self.getPosition());
 				viewModel.geolookup(self, largeInfoWindow);
 				self.setAnimation(google.maps.Animation.BOUNCE);
     			setTimeout(function(){ self.setAnimation(null); }, 750);
