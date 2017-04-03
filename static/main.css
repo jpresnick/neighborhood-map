@@ -112,20 +112,3 @@ a#menu svg {
 		font-size: 20px;
 	}
 }
-
-/*@media screen and (max-width: 600px){
-	.forecast{
-		height: 40px;
-		width: 40px;
-	}
-
-	#weather {
-		margin-left: 0;
-		right: 0;
-		padding-left: 3px;
-	}
-
-	ul {
-		padding-right: 3px;
-	}
-}*/
