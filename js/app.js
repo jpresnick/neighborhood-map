@@ -41,12 +41,11 @@ var viewModel = {
 	// when a filter is applied, showFilteredListings will add just those markers to the map
 	// when no filter is applied, it will add all markers to the map
 	showFilteredListings: function() {
-		for (var i = 0; i < view.markers.length; i++) {
-			//if marker title starts with the same string that filter does
+		view.markers.forEach( function(marker) {
 			if (view.markers[i].title.toLowerCase().indexOf(viewModel.filter()) == 0) {
 				view.markers[i].setVisible(true);
 			}
-		}
+		});
 	},
 
 	// hides all markers
