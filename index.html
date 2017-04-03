@@ -3,27 +3,27 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="static/main.css" />
+	<link rel="stylesheet" type="text/css" href="static/main.css">
 </head>
 <body>
 	<div class='container' id='container'>
-		<div class='nav-bar'>
+		<nav class='nav-bar'>
 			<a id='menu' data-bind='click: openList'>
 				<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
 					<path d='M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z'></path>
 				</svg>
 			</a>
 			<h2 class='title'>Neighborhood Map</h2>
-		</div>
-		<div class='list' id='list'>
+		</nav>
+		<aside class='list' id='list'>
 			<input type='text' id='filter-box' placeholder='Filter' data-bind='textInput: viewModel.filter, valueUpdate: "afterkeydown"'>
 			<ul data-bind='foreach: viewModel.filteredLocations'>
 				<li class='list-element' data-bind='click: viewModel.findMarker'>
 					<span data-bind='text: title'></span>
 				</li>	
 			</ul>
-		</div>
-		<div id='map'></div>
+		</aside>
+		<main id='map'></main>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src='js/knockout-3.4.2.js'></script>
