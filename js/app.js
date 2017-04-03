@@ -229,7 +229,7 @@ var view = {
 				// if image not available, add message to infowindow
 				else {
 						infowindow.setContent('<div>' + marker.title + '</div>' +
-							'<div>No Street View Found</div>');
+							'<div>No Street View Found</div><div class="infowindow-temp"> Currently feels like: '+ viewModel.temp()+'</div>');
 				}
 			}
 			streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
