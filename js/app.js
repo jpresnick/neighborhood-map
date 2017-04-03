@@ -95,6 +95,9 @@ var viewModel = {
 					var query = parsed_json['location']['requesturl'];
 					query = query.replace('html','json');
 					viewModel.getForcast(query);
+				}, 
+				error: function(data) {
+					alert("Weather failed to load, please check back later.");
 				}
 			});
 		});
