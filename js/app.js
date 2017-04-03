@@ -176,7 +176,7 @@ var view = {
 				view.map.panTo(self.getPosition());
 				viewModel.geolookup(self, largeInfoWindow);
 				self.setAnimation(google.maps.Animation.BOUNCE);
-    			setTimeout(function(){ self.setAnimation(null); }, 750);
+    			setTimeout(function(){ self.setAnimation(null); }, 700);
 			});
 			//set map bounds to be a little bigger than extent of the markers
 			bounds.extend(model.locations[i].location)
