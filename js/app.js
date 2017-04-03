@@ -56,23 +56,45 @@ var viewModel = {
 		}
 	},
 
-	// contains the json returned from the Wunderground API
-	forecastJSON: ko.observableArray([]),
-
-	// parses the wunderground API response and adds the relevent info to forecastJSON
-	getForcast: function($){
+	// contains the query string returned from the Wunderground API (viewModel.geolookup())
+	query: '',
+	// contains the temp retreived from Wunderground API (viewModel.getForecast())
+	temp: ko.observable(''),
+	// uses the query string obtained from geolookup to get the weather data for the specified
+	// lat and lon
+	getForcast: function(query){
+		viewModel.query = query;
 		jQuery(document).ready(function($){
 			$.ajax({
-				url: 'http://api.wunderground.co/api/e8145af40a88765c/forecast/q/FL/Saint_Petersburg.json',
+				url: 'http://api.wunderground.com/api/e8145af40a88765c/conditions/q/'+ viewModel.query,
 				dataType: 'jsonp',
 				success: function(parsed_json) {
-					var json = parsed_json['forecast']['simpleforecast']['forecastday'];
-					for (var i = 0; i < json.length; i++){
-							viewModel.forecastJSON.push(json[i]);
-					}
+					viewModel.temp(parsed_json['current_observation']['feelslike_string']);
+					view.openInfoWindow(viewModel.marker, viewModel.infowindow);
+					
 				}, 
 				error: function(data) {
 					alert("Weather failed to load, please check back later.");
+				}
+			});
+		});
+	},
+	// holds the marker to be opened
+	marker: '',
+	// holds the infowindow to be opened
+	infowindow: '',
+	// taks a lat/lng from a clicked marker and gets the query string from Wunderground API
+	geolookup: function(marker, infowindow){
+		viewModel.marker = marker;
+		viewModel.infowindow = infowindow;
+		jQuery(document).ready(function($){
+			$.ajax({
+				url: 'http://api.wunderground.com/api/e8145af40a88765c/geolookup/q/'+viewModel.marker.position.lat()+','+viewModel.marker.position.lng()+'.json',
+				dataType: 'jsonp',
+				success: function(parsed_json) {
+					var query = parsed_json['location']['requesturl'];
+					query = query.replace('html','json');
+					viewModel.getForcast(query);
 				}
 			});
 		});
@@ -123,12 +145,10 @@ var view = {
 	googleSuccess: function() {
 		ko.applyBindings(viewModel);
 		view.initMap();
-		viewModel.getForcast();
 	},
 
 	// runs if google maps api cannot be loaded
 	googleError: function() {
-		viewModel.getForcast();
 		alert("There was an error loading the page. Please check your internet connection or try again later.");
 	},
 
@@ -155,7 +175,7 @@ var view = {
 			// if marker is clicked, open infowindow and bounce pin
 			marker.addListener('click', function() {
 				var self = this;
-				view.openInfoWindow(self, largeInfoWindow);
+				viewModel.geolookup(self, largeInfoWindow);
 				self.setAnimation(google.maps.Animation.BOUNCE);
     			setTimeout(function(){ self.setAnimation(null); }, 750);
 			});
@@ -195,7 +215,7 @@ var view = {
 					var nearStreetViewLocation = data.location.latLng;
 					var heading = google.maps.geometry.spherical.computeHeading(
 						nearStreetViewLocation, marker.position);
-					infowindow.setContent('<div>' + marker.title + '</div><div id="streetview"></div>');
+					infowindow.setContent('<div class="infowindow-title">' + marker.title + '</div><div class="infowindow-temp"> Currently feels like: '+ viewModel.temp()+'</div><div id="streetview"></div>');
 						var panoramaOptions = {
 							position: nearStreetViewLocation,
 							pov: {
@@ -205,6 +225,7 @@ var view = {
 						};
 					var panorama = new google.maps.StreetViewPanorama(
 						document.getElementById('streetview'), panoramaOptions);
+
 				} 
 				// if image not available, add message to infowindow
 				else {
