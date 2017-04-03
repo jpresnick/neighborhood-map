@@ -42,8 +42,8 @@ var viewModel = {
 	// when no filter is applied, it will add all markers to the map
 	showFilteredListings: function() {
 		view.markers.forEach( function(marker) {
-			if (view.markers[i].title.toLowerCase().indexOf(viewModel.filter()) == 0) {
-				view.markers[i].setVisible(true);
+			if (marker.title.toLowerCase().indexOf(viewModel.filter()) == 0) {
+				marker.setVisible(true);
 			}
 		});
 	},
