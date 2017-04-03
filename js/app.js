@@ -131,13 +131,6 @@ viewModel.filteredLocations = ko.computed(function() {
 	}
 }, viewModel);
 
-// checks to see if a location title and the filter start with the same string
-var filterText = function(string, filter) {
-	if (filter.length > string.length)
-		return False;
-	return string.substring(0, filter.length) === filter;
-}
-
 // view contains the visual elements of the page
 var view = {
 	// holds the markers that have been added to the map
