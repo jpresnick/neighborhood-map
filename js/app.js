@@ -42,7 +42,7 @@ var viewModel = {
 	// when no filter is applied, it will add all markers to the map
 	showFilteredListings: function() {
 		view.markers.forEach( function(marker) {
-			if (marker.title.toLowerCase().indexOf(viewModel.filter()) == 0) {
+			if (marker.title.toLowerCase().indexOf(viewModel.filter()) > -1) {
 				marker.setVisible(true);
 			}
 		});
@@ -119,7 +119,7 @@ viewModel.filteredLocations = ko.computed(function() {
 		viewModel.hideListings();
 		viewModel.showFilteredListings();
 		var filtered = ko.utils.arrayFilter(model.locations, function(item) {
-			if (item.title.toLowerCase().indexOf(filter) == 0){
+			if (item.title.toLowerCase().indexOf(filter) > -1){
 				return true;
 			}
 			return false;
