@@ -188,7 +188,7 @@ var view = {
 		view.map.fitBounds(bounds);
 		//if browser is resized, map will recenter
 		google.maps.event.addDomListener(window, "resize", function() {
-    		view.centerMap();
+    		view.map.fitBounds(bounds);
 		});
 	},
 
